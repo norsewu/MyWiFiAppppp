@@ -12,7 +12,7 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
 
-    - name: 解压项目ZIP
+    - name: 解压项目ZIP只有温湿度
       run: |
         unzip -o WIFIApplication.zip
         # 自动处理嵌套文件夹
