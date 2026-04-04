@@ -14,10 +14,8 @@ jobs:
 
     - name: 解压项目ZIP
       run: |
-        # 如果ZIP文件名不是 project.zip，请改成你上传的实际文件名
         unzip -o WIFIApplication.zip
-        # 如果解压后发现所有文件都在一个子文件夹里，就把它移动到根目录
-        # 这里自动检测并处理：如果存在一个子文件夹，且该文件夹内有gradlew，则将其内容上移
+        # 自动处理嵌套文件夹
         if [ -f */gradlew ]; then
           SUBDIR=$(dirname */gradlew)
           echo "检测到嵌套文件夹: $SUBDIR，正在移动文件到根目录..."
@@ -25,11 +23,11 @@ jobs:
           rm -rf $SUBDIR
         fi
 
-    - name: Set up JDK 17
+    - name: Set up JDK 11
       uses: actions/setup-java@v4
       with:
         distribution: 'temurin'
-        java-version: '17'
+        java-version: '11'          # 改成 11
 
     - name: 赋予gradlew执行权限
       run: chmod +x gradlew
